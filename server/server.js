@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-
+const mongoose = require('mongoose');
 const app = express();
+require('dotenv').config();
 
 // require routers
 const apiRouter = require('./routes/api.js');
@@ -9,6 +10,9 @@ const apiRouter = require('./routes/api.js');
 // parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const mongoURI = process.env.MONGODB_URI;
+mongoose.connect(mongoURI);
 
 // route handlers
 app.use('/api', apiRouter);
