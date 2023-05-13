@@ -2,20 +2,21 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
-require('dotenv').config();
+
+// conect to mongo database
+const mongoURI = 'mongodb+srv://yetitime:yetitime@yetitime.jtwt5zb.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(mongoURI);
 
 // require routers
-const apiRouter = require('./routes/api.js');
+const eventRouter = require('./routes/event.js');
+const { send } = require('process');
 
 // parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect(mongoURI);
-
 // route handlers
-app.use('/api', apiRouter);
+app.use('/event', eventRouter);
 
 // unknown route handler
 app.use('*', (req, res) => {
