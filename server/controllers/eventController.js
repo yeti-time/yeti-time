@@ -4,7 +4,6 @@ const eventController = {};
 
 eventController.createEvent = async (req, res, next) => {
   const { name, dates, times } = req.body;
-
   function checkRequest() {
     // check name
     if (typeof name !== 'string') return false;
@@ -14,13 +13,9 @@ eventController.createEvent = async (req, res, next) => {
     for (date of dates) {
       if (typeof date !== 'string') return false;
     }
-    
+  
     // check times
-    if (!Array.isArray(times) || times.length !== 2) return false;
-    for (time of times) {
-      if (typeof time !== 'number') return false
-    }
-    
+    if (typeof times.start !== 'string' || typeof times.end !== 'string') return false; 
     return true;
   }
 
@@ -41,10 +36,9 @@ eventController.createEvent = async (req, res, next) => {
     return next();
   }
   catch (err) {
-    const errObj = {
+    return next({
       log: `Error occurred in eventController.createEvent: ${err.message}`
-    };
-    return next(errObj);
+    });
   }
 };
 module.exports = eventController;
