@@ -9,7 +9,6 @@ mongoose.connect(mongoURI);
 
 // require routers
 const eventRouter = require('./routes/event.js');
-const { send } = require('process');
 
 // parse request body
 app.use(express.json());
