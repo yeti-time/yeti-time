@@ -45,7 +45,6 @@ eventController.createEvent = async (req, res, next) => {
 
 eventController.getEvent = async (req, res, next) => {
   const {_id} = req.body;
-  console.log('id', _id);
   if (typeof _id !== 'string') {
     return next({
       log: `Error occurred in eventController.getEvent: Invalid request body`,
@@ -64,5 +63,27 @@ eventController.getEvent = async (req, res, next) => {
     })
   }
 }
+
+eventController.updateEvent = async (req, res, next) => {
+  const {_id, users} = req.body;
+  console.log('id and users', _id, users);
+  if (typeof _id !== 'string' && !Array.isArray(users)) {
+    return next({
+      log: `Error occurred in eventController.getEvent: Invalid request body`,
+      status: 400,
+      message: 'Request body wack'
+    });
+  }
+  try {
+    // first param is find matching doc, second param is field to update, third param is to return updated doc
+    res.locals.update = await Event.findOneAndUpdate({ _id: _id },{ users: users },{ new:true })
+    return next();
+  } catch (err) {
+    return next({
+      log: `Error occurred in eventController.updateEvent: ${err.message}`
+    })
+  }
+}
+
 
 module.exports = eventController;

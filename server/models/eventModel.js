@@ -8,7 +8,7 @@ const eventSchema = new Schema({
     start: {type: String, required: true},
     end: {type: String, required: true}
   },
-  people: [{
+  users: [{
     name: String,
     availability: [{
       date: String,

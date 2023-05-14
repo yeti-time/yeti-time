@@ -13,4 +13,7 @@ router.get('/', eventController.getEvent, (req, res) => {
   return res.status(200).json(res.locals.event);
 })
 
+router.post('/update', eventController.updateEvent, (req, res) => {
+  return res.status(200).json(res.locals.update);
+})
 module.exports = router;
