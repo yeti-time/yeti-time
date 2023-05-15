@@ -48,14 +48,14 @@ const TimeTable = () => {
       },
       body: JSON.stringify({ name }),
     });
-      //get the updated event data and set the state 
-       const updatedEvent = await response.json();
-       const updatedSelectedSlots = updatedEvent.users.reduce((slots, user) => {
-         slots[user.name] = user.availability;
-         return slots;
-       }, {});
+    //get the updated event data and set the state
+    const updatedEvent = await response.json();
+    const updatedSelectedSlots = updatedEvent.users.reduce((slots, user) => {
+      slots[user.name] = user.availability;
+      return slots;
+    }, {});
 
-       setSelectedSlots(updatedSelectedSlots);
+    setSelectedSlots(updatedSelectedSlots);
   };
 
   // Generate time slots based on user input
@@ -98,7 +98,15 @@ const TimeTable = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, date, timeSlot }),
+      body: JSON.stringify({
+        name,
+        availability: [
+          {
+            date,
+            timeslots: [timeSlot],
+          },
+        ],
+      }),
     });
   };
 
@@ -187,18 +195,17 @@ const TimeTable = () => {
         <h2>Enter your name</h2>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <button type="submit">Submit</button>
+          <button type='submit'>Submit</button>
         </form>
       </Modal>
       {renderTable()}
       {renderUsers()}
     </div>
-  );
   );
 };
 
