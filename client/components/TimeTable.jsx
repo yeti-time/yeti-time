@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import Modal from './Modal';
+import Modal from 'react-modal';
 
 const TimeTable = () => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const TimeTable = () => {
     // async function fetchEvent fetches event data and updates states.
     const fetchEvent = async () => {
       // Fetch event data from the backend.
-      const response = await fetch(`/events/${id}`);
+      const response = await fetch(`api/event/${id}`);
       const eventData = await response.json();
 
       // extract data and  Map users from eventData to selectedSlots object.
@@ -41,7 +41,7 @@ const TimeTable = () => {
     e.preventDefault();
     setShowModal(false);
     //add a new user to backend
-    const response = await fetch(`/events/${id}/users`, {
+    const response = await fetch(`api/event/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const TimeTable = () => {
     });
 
     // Make a request to update user availability
-    fetch(`/events/${id}/users`, {
+    fetch(`api/event/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
