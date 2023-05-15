@@ -1,16 +1,19 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import EventCreationPage from './EventCreationPage';
-// import InteractiveTimeTable from './InteractiveTimeTable'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import EventCreationPage from './EventCreationPage.jsx';
+import TimeTable from './TimeTable.jsx';
 
 const App = () => {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<EventCreationPage />} />
-        {/* <Route path="/event:id" element={<InteractiveTimeTable />} /> */}
-      </Routes>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path='/' element={<EventCreationPage />} />
+          <Route path='/event/:id' element={<TimeTable />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
+
 export default App;

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 // conect to mongo database
-const mongoURI = 'mongodb+srv://yetitime:yetitime@yetitime.jtwt5zb.mongodb.net/?retryWrites=true&w=majority';
+const mongoURI =
+  'mongodb+srv://yetitime:yetitime@yetitime.jtwt5zb.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoURI);
 
 // require routers
@@ -29,7 +30,7 @@ app.use((err, req, res, next) => {
     status: 500,
     message: 'Internal Server Error',
   };
-  
+
   const { log, status, message } = Object.assign({}, defaultError, err);
 
   console.log(log);
@@ -37,7 +38,7 @@ app.use((err, req, res, next) => {
 });
 
 // start server
-app.listen(PORT=3000, () => {
+app.listen((PORT = 3000), () => {
   console.log(`Server listening on port ${PORT}!`);
 });
 
