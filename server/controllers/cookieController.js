@@ -14,4 +14,17 @@ cookieController.setCookie = (req, res ,next) => {
   return next();
 };
 
+cookieController.checkCookie = (req, res, next) => {
+  const { id } = req.params;
+  const name = req.cookies && req.cookies.name;
+
+  if (name) {
+    console.log('cookie name exists', name)
+    return next();
+  } else {
+    console.log('Cookie name not found, redirecting to modal')
+    res.redirect(`/event/${id}`)
+  }
+}
+
 module.exports = cookieController;

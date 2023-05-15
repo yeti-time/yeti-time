@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // route handlers
-app.use('/api', apiRouter);
+app.use('/api', cookieParser(),  apiRouter);
 
 // unknown route handler
 app.use('*', (req, res) => {
