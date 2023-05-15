@@ -5,7 +5,6 @@ const eventController = {};
 
 eventController.createEvent = async (req, res, next) => {
   const { name, dates, times } = req.body;
-
   function checkRequest() {
     // check name
     if (typeof name !== 'string') return false;
@@ -17,7 +16,7 @@ eventController.createEvent = async (req, res, next) => {
     }
   
     // check times
-    if (typeof times !== 'Object') return false;
+    if (typeof times !== 'object') return false;
     if (typeof times.start !== 'string' || typeof times.end !== 'string') return false;
 
     return true;

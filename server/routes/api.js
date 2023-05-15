@@ -1,5 +1,6 @@
 const express = require('express');
-const eventController = require('../controllers/eventController')
+const eventController = require('../controllers/eventController');
+const cookieController = require('../controllers/cookieController');
 // const cookieParser = require('cookie-parser');
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/event/:id', eventController.getEvent, (req, res) => {
   return res.status(200).json(res.locals.event);
 });
 
-router.put('/event/:id', eventController.updateEvent, (req, res) => {
+router.put('/event/:id', cookieController.setCookie, eventController.updateEvent, (req, res) => {
   return res.status(200).json(res.locals.updatedEvent);
 });
 
