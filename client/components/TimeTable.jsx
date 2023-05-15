@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
+import Modal from './Modal';
 
 const TimeTable = () => {
   const { id } = useParams();
   // Set up the state
   const [event, setEvent] = useState(null);
   const [selectedSlots, setSelectedSlots] = useState({});
+  const [showModal, setShowModal] = useState(true);
+  const [name, setName] = useState('');
+
   //const [users, setUsers] = useState([]);
 
   // useEffect hook runs the fetchEvent function every time "id" changes.
@@ -17,7 +21,7 @@ const TimeTable = () => {
       const response = await fetch(`/events/${id}`);
       const eventData = await response.json();
 
-      // Map users from eventData to selectedSlots object.
+      // extract data and  Map users from eventData to selectedSlots object.
       const selectedSlots = eventData.users.reduce((slots, user) => {
         slots[user.name] = user.availability;
         return slots;
@@ -31,6 +35,28 @@ const TimeTable = () => {
     // Perform fetch operation.
     fetchEvent();
   }, [id]); // Dependency array - effect runs when "id" changes.
+
+  //handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowModal(false);
+    //add a new user to backend
+    const response = await fetch(`/events/${id}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name }),
+    });
+      //get the updated event data and set the state 
+       const updatedEvent = await response.json();
+       const updatedSelectedSlots = updatedEvent.users.reduce((slots, user) => {
+         slots[user.name] = user.availability;
+         return slots;
+       }, {});
+
+       setSelectedSlots(updatedSelectedSlots);
+  };
 
   // Generate time slots based on user input
   const generateTimeSlots = (start, end) => {
@@ -157,9 +183,22 @@ const TimeTable = () => {
 
   return (
     <div>
+      <Modal isOpen={showModal}>
+        <h2>Enter your name</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </Modal>
       {renderTable()}
       {renderUsers()}
     </div>
+  );
   );
 };
 
