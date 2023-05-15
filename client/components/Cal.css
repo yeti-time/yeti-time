@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #AEDBF0
 }
 .react-calendar {
     width: 550px;
@@ -60,5 +61,8 @@
 }
 
 .eventName {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

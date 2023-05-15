@@ -37,7 +37,7 @@ function EventCreationPage() {
       endTime: endTime,
     };
 
-    fetch('/api/events', {
+    fetch('/api/event', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function EventCreationPage() {
       .then((response) => response.json())
       .then((data) => {
             const id = data.id
-            navigate(`/api/events/${id}`)
+            navigate(`/event/${id}`)
       })
       .catch((error) => {
         console.error(error);
@@ -72,9 +72,9 @@ function EventCreationPage() {
         </div>
         <div className='formSection'>
         <div>
-            <label>Name of your Event </label>
+            <label className="eventName">Name of your Event </label>
             <br></br>
-            <input className="eventName" type="text" placeholder='Event Name' value={name} onChange={handleName}/>
+            <input type="text" placeholder='Event Name' value={name} onChange={handleName}/>
         </div>
 
         <div>

@@ -8,7 +8,7 @@ const App = ({ id }) => {
     <div>
       <Routes>
         <Route path="/" element={<EventCreationPage />} />
-        {/* <Route path="/events/${id}" element={<InteractiveTimeTable />} /> */}
+        {/* <Route path="/event/${id}" element={<InteractiveTimeTable />} /> */}
       </Routes>
     </div>
   );
