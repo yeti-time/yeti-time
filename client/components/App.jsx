@@ -3,12 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import EventCreationPage from './EventCreationPage';
 // import InteractiveTimeTable from './InteractiveTimeTable'
 
-const App = ({ id }) => {
+const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<EventCreationPage />} />
-        {/* <Route path="/event/${id}" element={<InteractiveTimeTable />} /> */}
+        {/* <Route path="/event:id" element={<InteractiveTimeTable />} /> */}
       </Routes>
     </div>
   );

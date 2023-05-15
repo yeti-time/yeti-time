@@ -3,21 +3,28 @@ import Calendar from 'react-calendar';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
 import './Cal.css'
 
 function EventCreationPage() {
   const [dates, setSelectedDates] = useState([]);
   const [name, setName] = useState("")
-  const [times, setTime] = useState({startTime, endTime})
   const [startTime, setStartTime] = useState('12:00')
   const [endTime, setEndTime] = useState('12:30')
 
   const navigate = useNavigate()
 
-
   const handleClick = (selectedDates) => {
-    setSelectedDates([...dates, selectedDates]);
-  }
+    if (Array.isArray(selectedDates)) {
+      const formattedDates = selectedDates.map((date) =>
+        moment(date).format('MMMM Do YYYY')
+      );
+      setSelectedDates([...dates, ...formattedDates]);
+    } else {
+      const formattedDate = moment(selectedDates).format('MMMM Do YYYY');
+      setSelectedDates([...dates, formattedDate]);
+    }
+  };
 
   const handleName = (event) => {
     setName(event.target.value)
@@ -48,6 +55,8 @@ function EventCreationPage() {
       .then((data) => {
             const id = data._id
             console.log(id)
+            console.log(dates)
+            console.log(data.dates)
             navigate(`/event/${id}`)
       })
       .catch((error) => {
@@ -64,7 +73,7 @@ function EventCreationPage() {
             <h1 className='text-center'> Yeti Time </h1>
             <h2> What Days Would You Like to Meet?</h2>
             <div className='calender-container'>
-            <Calendar onChange={handleClick} />
+            <Calendar onChange={handleClick} minDate={new Date()}/>
             </div>
             {/* <h2>Dates Selected: </h2>
             {dates.map((dates, index) => (

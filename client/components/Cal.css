@@ -2,9 +2,10 @@
     display: grid;
     grid-template: auto/ repeat(auto-fit, minmax(500px, 1fr));
 }
-.Text-center{
-    font: bayformance;
-    font-size: larger;
+.text-center{
+    font: impact;
+    font-weight: bold;
+    font-style: italic;
 }
 .calenderSection{
     display: flex;
@@ -54,11 +55,14 @@
     border-radius: 6px;
 }
 .react-calendar__tile--active {
-    background: #53CDF9;
+    background: #AEDBF0;
     border-radius: 6px;
     font-weight: bold;
     color: white;
 }
+.react-calendar__tile--now {
+    background: rgb(55, 137, 244)
+  }
 
 .eventName {
     display: flex;
