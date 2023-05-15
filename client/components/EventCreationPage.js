@@ -8,6 +8,7 @@ import './Cal.css'
 function EventCreationPage() {
   const [dates, setSelectedDates] = useState([]);
   const [name, setName] = useState("")
+  const [times, setTime] = useState({startTime, endTime})
   const [startTime, setStartTime] = useState('12:00')
   const [endTime, setEndTime] = useState('12:30')
 
@@ -33,8 +34,7 @@ function EventCreationPage() {
     const event = {
       name: name,
       dates: dates,
-      startTime: startTime,
-      endTime: endTime,
+      times: {start: startTime, end: endTime},
     };
 
     fetch('/api/event', {
@@ -46,7 +46,8 @@ function EventCreationPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-            const id = data.id
+            const id = data._id
+            console.log(id)
             navigate(`/event/${id}`)
       })
       .catch((error) => {
