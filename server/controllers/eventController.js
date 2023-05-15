@@ -17,7 +17,7 @@ eventController.createEvent = async (req, res, next) => {
     }
   
     // check times
-    if (typeof times !== 'Object') return false;
+    if (typeof times !== 'object') return false;
     if (typeof times.start !== 'string' || typeof times.end !== 'string') return false;
 
     return true;
