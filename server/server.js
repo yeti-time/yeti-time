@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 // conect to mongo database
 const mongoURI =
@@ -16,7 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // route handlers
-app.use('/api', apiRouter);
+// Parse all incoming cookies and store on req.cookies object
+app.use('/api', cookieParser(),  apiRouter);
 
 // unknown route handler
 app.use('*', (req, res) => {

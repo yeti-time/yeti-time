@@ -5,8 +5,6 @@ const eventController = {};
 
 eventController.createEvent = async (req, res, next) => {
   const { name, dates, times } = req.body;
-  console.log("this is my whole body", req.body)
-
   function checkRequest() {
     // check name
     if (typeof name !== 'string') return false;
