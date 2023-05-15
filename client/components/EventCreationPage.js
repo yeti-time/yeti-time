@@ -54,9 +54,9 @@ function EventCreationPage() {
       .then((response) => response.json())
       .then((data) => {
             const id = data._id
+            const dates = data.dates
             console.log(id)
             console.log(dates)
-            console.log(data.dates)
             navigate(`/event/${id}`)
       })
       .catch((error) => {
@@ -73,12 +73,8 @@ function EventCreationPage() {
             <h1 className='text-center'> Yeti Time </h1>
             <h2> What Days Would You Like to Meet?</h2>
             <div className='calender-container'>
-            <Calendar onChange={handleClick} minDate={new Date()}/>
+            <Calendar onChange={handleClick} minDate={new Date()} />
             </div>
-            {/* <h2>Dates Selected: </h2>
-            {dates.map((dates, index) => (
-            <li key={index}>{dates.toLocaleDateString()}</li>
-            ))} */}
         </div>
         <div className='formSection'>
         <div>
@@ -87,7 +83,7 @@ function EventCreationPage() {
             <input type="text" placeholder='Event Name' value={name} onChange={handleName}/>
         </div>
 
-        <div>
+        <div className='timePickers'>
             <TimePicker 
                 onChange={handleStartTime}
                 value={startTime}
@@ -95,7 +91,7 @@ function EventCreationPage() {
                 disableClock={true}
                 minuteInterval={30}
             /> 
-            <h2> to </h2>
+            <h2>      to             </h2>
             <TimePicker 
                 onChange={handleEndTime}
                 value={endTime}
