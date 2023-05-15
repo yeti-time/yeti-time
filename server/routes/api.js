@@ -1,7 +1,7 @@
 const express = require('express');
 const eventController = require('../controllers/eventController');
 const cookieController = require('../controllers/cookieController');
-// const cookieParser = require('cookie-parser');
+
 
 const router = express.Router();
 
