@@ -8,14 +8,14 @@ const mongoURI = 'mongodb+srv://yetitime:yetitime@yetitime.jtwt5zb.mongodb.net/?
 mongoose.connect(mongoURI);
 
 // require routers
-const eventRouter = require('./routes/event');
+const apiRouter = require('./routes/api');
 
 // parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // route handlers
-app.use('/event', eventRouter);
+app.use('/api', apiRouter);
 
 // unknown route handler
 app.use('*', (req, res) => {
