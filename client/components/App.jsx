@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EventCreationPage from './EventCreationPage.jsx';
 import TimeTable from './TimeTable.jsx';
 
-const App = ({ id }) => {
+const App = () => {
   return (
     <Router>
       <div>
