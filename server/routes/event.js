@@ -3,15 +3,13 @@ const eventController = require('../controllers/eventController')
 
 const router = express.Router();
 
-// TODO: GET request routes
+router.get('/', eventController.getEvent, (req, res) => {
+  return res.status(200).json(res.locals.event);
+})
 
 router.post('/', eventController.createEvent, (req, res) => {
   return res.status(200).json(res.locals.newEvent);
 });
-
-router.get('/', eventController.getEvent, (req, res) => {
-  return res.status(200).json(res.locals.event);
-})
 
 router.put('/update', eventController.updateEvent, (req, res) => {
   return res.status(200).json(res.locals.update);
