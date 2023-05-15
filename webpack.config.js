@@ -22,7 +22,7 @@ module.exports = {
     },
     // proxy for express server
     proxy: {
-      '/event': 'http://localhost:3000'
+      '/api': 'http://localhost:3000'
     }
   },
   module: {
