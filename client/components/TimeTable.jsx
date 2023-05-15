@@ -17,13 +17,13 @@ const TimeTable = () => {
 
     // Check if cookie name property exists, if it does, hide the Modal and set name to stored cookie name value
     // ADDED for cookie checker
-    useEffect(() => {
-      const cookie = Cookies.get('name')
-      if (cookie) {
-        setShowModal(false);
-        setName(cookie);
-      }
-    }, []);
+    // useEffect(() => {
+    //   const cookie = Cookies.get('name')
+    //   if (cookie) {
+    //     setShowModal(false);
+    //     setName(cookie);
+    //   }
+    // }, []);
   // useEffect hook runs the fetchEvent function every time "id" changes.
   useEffect(() => {
     // async function fetchEvent fetches event data and updates states.
@@ -42,9 +42,14 @@ const TimeTable = () => {
       setSelectedSlots(selectedSlots);
       setEvent(eventData);
     };
-
+    
     // Perform fetch operation.
     fetchEvent();
+    const cookie = Cookies.get('name')
+      if (cookie) {
+        setShowModal(false);
+        setName(cookie);
+      }
   }, [id]); // Dependency array - effect runs when "id" changes.
 
   //handle form submission
