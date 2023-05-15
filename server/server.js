@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
-
+const mongoose = require('mongoose');
 const app = express();
 
+// conect to mongo database
+const mongoURI = 'mongodb+srv://yetitime:yetitime@yetitime.jtwt5zb.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(mongoURI);
+
 // require routers
-const apiRouter = require('./routes/api.js');
+const apiRouter = require('./routes/api');
 
 // parse request body
 app.use(express.json());
@@ -21,7 +25,7 @@ app.use('*', (req, res) => {
 // global error handler
 app.use((err, req, res, next) => {
   const defaultError = {
-    log: 'Express caught an unknown middleware error',
+    log: `Express caught an unknown middleware error: ${err}`,
     status: 500,
     message: 'Internal Server Error',
   };
