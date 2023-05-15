@@ -25,7 +25,7 @@ app.use('*', (req, res) => {
 // global error handler
 app.use((err, req, res, next) => {
   const defaultError = {
-    log: 'Express caught an unknown middleware error',
+    log: `Express caught an unknown middleware error: ${err}`,
     status: 500,
     message: 'Internal Server Error',
   };

@@ -3,7 +3,7 @@ const eventController = require('../controllers/eventController')
 
 const router = express.Router();
 
-router.get('/', eventController.getEvent, (req, res) => {
+router.get('/:id', eventController.getEvent, (req, res) => {
   return res.status(200).json(res.locals.event);
 })
 
@@ -11,7 +11,7 @@ router.post('/', eventController.createEvent, (req, res) => {
   return res.status(200).json(res.locals.newEvent);
 });
 
-router.put('/update', eventController.updateEvent, (req, res) => {
-  return res.status(200).json(res.locals.update);
+router.put('/:id', eventController.updateEvent, (req, res) => {
+  return res.status(200).json(res.locals.updatedEvent);
 })
 module.exports = router;
