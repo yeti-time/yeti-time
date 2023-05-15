@@ -1,12 +1,16 @@
 import React from 'react';
-import '../style.css';
+import { Routes, Route } from 'react-router-dom';
+import EventCreationPage from './EventCreationPage';
+import TimeTable from './TimeTable.jsx';
 
-const App = () => {
+const App = ({ id }) => {
   return (
     <div>
-      <h1>Hello world!</h1>
+      <Routes>
+        <Route path='/' element={<EventCreationPage />} />
+        <Route path='/event/:id' element={<TimeTable />} />
+      </Routes>
     </div>
-  )
-}
-
+  );
+};
 export default App;
