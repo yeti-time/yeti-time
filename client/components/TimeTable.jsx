@@ -15,15 +15,6 @@ const TimeTable = () => {
 
   //const [users, setUsers] = useState([]);
 
-    // Check if cookie name property exists, if it does, hide the Modal and set name to stored cookie name value
-    // ADDED for cookie checker
-    // useEffect(() => {
-    //   const cookie = Cookies.get('name')
-    //   if (cookie) {
-    //     setShowModal(false);
-    //     setName(cookie);
-    //   }
-    // }, []);
   // useEffect hook runs the fetchEvent function every time "id" changes.
   useEffect(() => {
     // async function fetchEvent fetches event data and updates states.
