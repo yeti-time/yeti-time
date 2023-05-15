@@ -1,0 +1,64 @@
+.Yeti {
+    display: grid;
+    grid-template: auto/ repeat(auto-fit, minmax(500px, 1fr));
+}
+.Text-center{
+    font: bayformance;
+    font-size: larger;
+}
+.calenderSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.react-calendar {
+    width: 550px;
+    height: 500px;
+    max-width: 100%;
+    background: white;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+}
+.react-calendar--doubleView {
+    width: 700px;
+}
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+.react-calendar__tile {
+    max-width: 100%;
+    padding: 10px 6.6667px;
+    background: none;
+    text-align: center;
+    line-height: 60px;
+}
+.react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1em;
+  }
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    border-radius: 6px;
+}
+.react-calendar__tile--active {
+    background: #53CDF9;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+}
+
+.eventName {
+    
+}
