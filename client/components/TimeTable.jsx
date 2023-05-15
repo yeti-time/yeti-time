@@ -6,10 +6,11 @@ import Modal from 'react-modal';
 const TimeTable = () => {
   const { id } = useParams();
   // Set up the state
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState('');
   const [selectedSlots, setSelectedSlots] = useState({});
   const [showModal, setShowModal] = useState(true);
   const [name, setName] = useState('');
+  const [timeslots, setTimeslots] = useState([]);
 
   //const [users, setUsers] = useState([]);
 
@@ -18,7 +19,7 @@ const TimeTable = () => {
     // async function fetchEvent fetches event data and updates states.
     const fetchEvent = async () => {
       // Fetch event data from the backend.
-      const response = await fetch(`api/event/${id}`);
+      const response = await fetch(`/api/event/${id}`);
       const eventData = await response.json();
 
       // extract data and  Map users from eventData to selectedSlots object.
@@ -41,12 +42,15 @@ const TimeTable = () => {
     e.preventDefault();
     setShowModal(false);
     //add a new user to backend
-    const response = await fetch(`api/event/${id}`, {
-      method: 'POST',
+    const response = await fetch(`/api/event/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({
+        name,
+        availability: [],
+      }),
     });
     //get the updated event data and set the state
     const updatedEvent = await response.json();
@@ -75,8 +79,15 @@ const TimeTable = () => {
 
   // Handle time slot interaction from the user
   const handleTimeSlots = (name, date, timeSlot) => {
-    // Add selected time slot to the list
+    // add selected time to timeslots (for current user)
+    const newTimeslots = timeslots;
+    newTimeslots.push(timeSlot);
+    setTimeslots(newTimeslots);
+
+    // Add selected time slot to SelectedSlots (for everyone)
     setSelectedSlots((prevSlots) => {
+      // TODO: fix this shit
+
       // Create a copy of the previous slots
       let newSlots = Object.assign({}, prevSlots);
 
@@ -93,8 +104,8 @@ const TimeTable = () => {
     });
 
     // Make a request to update user availability
-    fetch(`api/event/${id}`, {
-      method: 'POST',
+    fetch(`/api/event/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -103,7 +114,9 @@ const TimeTable = () => {
         availability: [
           {
             date,
-            timeslots: [timeSlot],
+
+            // TODO: fix this shit too
+            timeslots: timeslots,
           },
         ],
       }),
@@ -137,7 +150,7 @@ const TimeTable = () => {
               {generateTimeSlots(startTime, endTime).map((timeSlot) => (
                 <button
                   key={timeSlot}
-                  onClick={() => handleTimeSlots(event.name, date, timeSlot)}
+                  onClick={() => handleTimeSlots(name, date, timeSlot)}
                   style={{
                     backgroundColor: getButtonColor(date, timeSlot),
                   }}>
@@ -150,6 +163,7 @@ const TimeTable = () => {
       </div>
     );
   };
+
   const getButtonColor = (date, timeSlot) => {
     // Count how many users have selected this time slot
     let count = 0;
@@ -203,6 +217,7 @@ const TimeTable = () => {
           <button type='submit'>Submit</button>
         </form>
       </Modal>
+      <h1>{event.name}</h1>
       {renderTable()}
       {renderUsers()}
     </div>

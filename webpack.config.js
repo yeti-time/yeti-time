@@ -11,8 +11,8 @@ module.exports = {
   plugins: [
     // bundle html files
     new HTMLWebpackPlugin({
-      template: './client/index.html'
-    })
+      template: './client/index.html',
+    }),
   ],
   devServer: {
     // serve static files
@@ -22,27 +22,27 @@ module.exports = {
     },
     // proxy for express server
     proxy: {
-      '/api': 'http://localhost:3000'
-    }
+      '/api/**': 'http://localhost:3000',
+    },
   },
   module: {
     rules: [
       // babel loaders
       {
-        test: /\.jsx?/, 
+        test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: { 
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       // css loaders
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
-  }
-}
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
