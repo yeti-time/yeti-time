@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mobiscroll/react": "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.24.1.tgz",
     "calendar": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
