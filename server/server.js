@@ -26,7 +26,7 @@ app.use('*', (req, res) => {
 });
 
 // global error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, next) => { /* eslint-disable-line */
   const defaultError = {
     log: `Express caught an unknown middleware error: ${err}`,
     status: 500,
