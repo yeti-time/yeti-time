@@ -11,7 +11,7 @@ eventController.createEvent = async (req, res, next) => {
     
     // check dates
     if (!Array.isArray(dates)) return false;
-    for (date of dates) {
+    for (const date of dates) {
       if (typeof date !== 'string') return false;
     }
   
@@ -25,7 +25,7 @@ eventController.createEvent = async (req, res, next) => {
   // check if request body contains valid event fields
   if (!checkRequest()) {
     return next({
-      log: `Error occurred in eventController.createEvent: Invalid request body`,
+      log: 'Error occurred in eventController.createEvent: Invalid request body',
       status: 400,
       message: 'Event could not be created'
     });
@@ -54,7 +54,7 @@ eventController.getEvent = async (req, res, next) => {
   // check if request parameter is a valid event id
   if (!mongoose.isValidObjectId(id)) {
     return next({
-      log: `Error occurred in eventController.getEvent: Request parameter is not a valid ObjectId`,
+      log: 'Error occurred in eventController.getEvent: Request parameter is not a valid ObjectId',
       status: 400,
       message: `${id} is not a valid event id`
     });
@@ -66,7 +66,7 @@ eventController.getEvent = async (req, res, next) => {
     // check if event was not found in database
     if (res.locals.event === null) {
       return next({
-        log: `Error occurred in eventController.getEvent: Event id was not found in database`,
+        log: 'Error occurred in eventController.getEvent: Event id was not found in database',
         status: 404,
         message: 'Event was not found'
       });
@@ -79,7 +79,7 @@ eventController.getEvent = async (req, res, next) => {
       log: `Error occurred in eventController.getEvent: ${err}`,
     });
   }
-}
+};
 
 eventController.updateEvent = async (req, res, next) => {
   const { id } = req.params;
@@ -100,7 +100,7 @@ eventController.updateEvent = async (req, res, next) => {
 
   if (!checkUser()) {
     return next({
-      log: `Error occurred in eventController.updateEvent: Invalid request body`,
+      log: 'Error occurred in eventController.updateEvent: Invalid request body',
       status: 400,
       message: 'Request body should be an object with the name and availability of a single user'
     });
@@ -109,7 +109,7 @@ eventController.updateEvent = async (req, res, next) => {
   // check if request parameter is a valid event id
   if (!mongoose.isValidObjectId(id)) {
     return next({
-      log: `Error occurred in eventController.updateEvent: Request parameter is not a valid ObjectId`,
+      log: 'Error occurred in eventController.updateEvent: Request parameter is not a valid ObjectId',
       status: 400,
       message: `${id} is not a valid event id`
     });
@@ -121,7 +121,7 @@ eventController.updateEvent = async (req, res, next) => {
     // check if event id was not found in database
     if (event === null) {
       return next({
-        log: `Error occurred in eventController.getEvent: Event id was not found in database`,
+        log: 'Error occurred in eventController.getEvent: Event id was not found in database',
         status: 400,
         message: 'Event was not found'
       });
@@ -147,9 +147,9 @@ eventController.updateEvent = async (req, res, next) => {
   catch (err) {
     return next({
       log: `Error occurred in eventController.updateEvent: ${err}`
-    })
+    });
   }
-}
+};
 
 
 module.exports = eventController;

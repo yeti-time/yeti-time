@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import Modal from 'react-modal';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const TimeTable = () => {
   const { id } = useParams();
@@ -36,11 +36,11 @@ const TimeTable = () => {
     
     // Perform fetch operation.
     fetchEvent();
-    const cookie = Cookies.get('name')
-      if (cookie) {
-        setShowModal(false);
-        setName(cookie);
-      }
+    const cookie = Cookies.get('name');
+    if (cookie) {
+      setShowModal(false);
+      setName(cookie);
+    }
   }, [id]); // Dependency array - effect runs when "id" changes.
 
   //handle form submission
