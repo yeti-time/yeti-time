@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import Modal from 'react-modal';
 import Cookies from 'js-cookie';
+import UsersDisplay from './UsersDisplay.jsx';
 
 const TimeTable = () => {
   const { id } = useParams();
@@ -195,22 +196,6 @@ const TimeTable = () => {
     }
   };
 
-  const renderUsers = () => {
-    // Render the list of users
-    const userNames = Object.keys(selectedSlots);
-
-  
-
-    return (
-      <div>
-        <h2>Users</h2>
-        {userNames.map((user) => (
-          <p key={user}>{user}</p>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <div>
       <Modal isOpen={showModal}>
@@ -227,7 +212,7 @@ const TimeTable = () => {
       </Modal>
       <h1>{event.name}</h1>
       {renderTable()}
-      {renderUsers()}
+      <UsersDisplay selectedSlots={selectedSlots} />
     </div>
   );
 };
