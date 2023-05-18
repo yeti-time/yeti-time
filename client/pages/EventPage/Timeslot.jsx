@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Cell = () => {
+const Timeslot = () => {
   return (
     <div>
     </div>
-  )
-}
+  );
+};
 
-export default Cell;
+export default Timeslot;
